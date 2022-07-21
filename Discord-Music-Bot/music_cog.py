@@ -11,10 +11,11 @@ class music_cog(commands.Cog):
 
         self.is_playing = False
         self.is_paused = False
+        self.track_exists = False
 
-
+        self.replay_queue = []
         self.music_queue = []
-        self.YDL_OPTIONS = {'format': 'bestaudio', 'noplaylist': 'False'}
+        self.YDL_OPTIONS = {'format': 'bestaudio', 'noplaylist': 'True'}
         self.FFMPEG_OPTIONS = {'before_options': '-reconnect 1 -reconnect_streamed 1 -reconnect_delay_max 5', 'options':'-vn'}
 
         self.vc = None
@@ -39,6 +40,7 @@ class music_cog(commands.Cog):
             self.vc.play(discord.FFmpegPCMAudio(m_url, **self.FFMPEG_OPTIONS), after=lambda e: self.play_next())
         else:
             self.is_playing = False
+            self.track_exists = False
 
     async def play_music(self, ctx):
         if len(self.music_queue) > 0:
@@ -58,8 +60,9 @@ class music_cog(commands.Cog):
 
                 self.vc.play(discord.FFmpegPCMAudio(m_url, **self.FFMPEG_OPTIONS), after=lambda e: self.play_next())
 
-            else:
-                self.is_playing = False
+        else:
+            self.is_playing = False
+            self.track_exists = False
 
     
     @bot.command(name="play", aliases = ['p','vai'])
@@ -70,7 +73,7 @@ class music_cog(commands.Cog):
 
         """
         query = " ".join(args)
-
+        self.track_exists = True
         if ctx.author.voice is None:
             await ctx.send("Please connect to a voice channel!")
         elif self.is_paused:
@@ -83,6 +86,7 @@ class music_cog(commands.Cog):
             else:
                 await ctx.send(f"{ctx.author} has queued {song['title']} into the playlist!")
                 self.music_queue.append([song, voice_channel])
+                self.replay_queue.append([song, voice_channel])
 
                 if self.is_playing == False:
                     await self.play_music(ctx)
@@ -123,12 +127,16 @@ class music_cog(commands.Cog):
         Skips current track.
         !skip
         """
-        if self.vc != None and self.vc:
-            self.vc.stop()
-            await self.play_music(ctx)
-            await ctx.send(f"{ctx.author} has skipped the current track.")
-        
-        ctx.send("There are no tracks on queue!")
+        if self.vc != None:
+            if len(self.music_queue) == 0:
+                self.vc.stop()
+                await self.play_music(ctx)
+                await ctx.send('No more songs in queue! Bye-bye, until next time! :*')
+                await self.vc.disconnect()
+            else:
+                self.vc.stop()
+                await self.play_music(ctx)
+
 
     @bot.command(name='queue', aliases = ['q', 'fila'])
     async def queue(self, ctx):   
@@ -141,7 +149,24 @@ class music_cog(commands.Cog):
 
         for i in range(0, len(self.music_queue)):
             if i > 10: break
-            retval += self.music_queue[i][0]['title'] + '\n'
+            retval += f"{i+1}:{self.music_queue[i][0]['title']} \n"
+        
+        if retval != "":
+            await ctx.send(retval)
+        else:
+            await ctx.send("No music in queue.")
+
+    @bot.command(name='history', aliases = ['h', 'historico'])
+    async def history(self, ctx):   
+        """
+        Displays the current replay queue.
+        !queue
+        """
+
+        retval = ''
+
+        for i in range(0, len(self.replay_queue)):
+            retval += f"{i+1}:{self.replay_queue[i][0]['title']} \n"
         
         if retval != "":
             await ctx.send(retval)
@@ -174,4 +199,17 @@ class music_cog(commands.Cog):
         Replays any number of the past played tracks. 
         !replay [number of tracks]
         """
-        await ctx.send(f"{ctx.author} has re-queued the last {arg} tracks.")
+        choice = int(arg)
+        if len(self.replay_queue) >= choice:
+            original_rq_len = len(self.replay_queue)
+            while True:
+                self.music_queue.append(self.replay_queue[choice-1])
+                self.replay_queue.append(self.replay_queue[choice-1])
+                await ctx.send(f'{self.replay_queue[choice-1][0]["title"]}') 
+                choice += 1
+                if choice > original_rq_len:
+                    break
+
+            await ctx.send(f"{ctx.author} has re-queued the listed tracks.")
+        else:
+            await ctx.send(f"There are less then {arg} tracks in the replay queue. Try Again!")
