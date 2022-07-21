@@ -81,4 +81,4 @@ async def help(ctx):
     await ctx.send(embed=embed)
 
 
-bot.run('OTk5MzU2Nzc1MTkzMTIwNzk4.GC3zg2.PvX58Qok22oJUIAI66L7WesT83Lw8bd7M8rHfU')
+bot.run('Oops Again!!!')
