@@ -81,4 +81,4 @@ async def help(ctx):
     await ctx.send(embed=embed)
 
 
-bot.run('Oops Again!!!')
+bot.run('Not Today')
