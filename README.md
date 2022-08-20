@@ -1,6 +1,6 @@
-## Cherry MC  -  Discord Music Bot
+## Cheru FM -  Discord Music Bot
 
-<img src="https://static.wikia.nocookie.net/pkmnshuffle/images/7/74/Cherubi.png/revision/latest?cb=20170409015948">
+<img src="https://cdn.custom-cursor.com/packs/3718/cute-cherry-pack.png" width="300" height="150">
 
 (Bot is currently down for maintenence and update ^^)
 
