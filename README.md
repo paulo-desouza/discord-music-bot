@@ -1,6 +1,6 @@
 ## Cherry MC  -  Discord Music Bot
 
-<img src="http://pa1.narvii.com/5807/af98633a758abec7ad645a74983a231164e5c21e_00.gif">
+<img src="https://static.wikia.nocookie.net/pkmnshuffle/images/7/74/Cherubi.png/revision/latest?cb=20170409015948">
 
 (Bot is currently down for maintenence and update ^^)
 
