@@ -1,4 +1,4 @@
-## Cheru FM -  Discord Music Bot
+## Cherry DJ -  Discord Music Bot
 
 <img src="https://cdn.custom-cursor.com/packs/3718/cute-cherry-pack.png" width="300" height="150">
 
