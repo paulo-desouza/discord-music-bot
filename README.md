@@ -7,7 +7,7 @@
 Music bot for your discord group parties!
 Great for studying, playing, and hanging out with friends. 
 
-<!--Click <a href="#">here</a> to add it to your server!-->
+Click <a href="https://discord.com/api/oauth2/authorize?client_id=999356775193120798&permissions=274881072128&scope=bot">here</a> to add it to your server!
 
 
 Here is a list with the current commands and functionalities:
@@ -39,3 +39,4 @@ Here is a list with the current commands and functionalities:
         !leave 
         Kicks the bot out of the voice channel. 
 
+(Currently not taking URL or Playlist URL arguments, it works as a youtube search.)
