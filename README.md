@@ -2,8 +2,6 @@
 
 <img src="https://cdn.custom-cursor.com/packs/3718/cute-cherry-pack.png" width="300" height="150">
 
-(Bot is currently down for maintenence and update ^^)
-
 Music bot for your discord group parties!
 Great for studying, playing, and hanging out with friends. 
 
@@ -13,7 +11,7 @@ Click <a href="https://discord.com/api/oauth2/authorize?client_id=99935677519312
 Here is a list with the current commands and functionalities:
 
         !play
-        Plays or adds selected music/playlist to the queue. 
+        Plays or adds selected music to the queue. 
     
         !queue 
         Displays the queue.  
