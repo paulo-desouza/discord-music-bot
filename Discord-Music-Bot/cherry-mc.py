@@ -81,4 +81,4 @@ async def help(ctx):
     await ctx.send(embed=embed)
 
 
-bot.run('Not Today')
+bot.run('OTk5MzU2Nzc1MTkzMTIwNzk4.Gh6afS.7eII_Siw2Wsg2PWQb1iNS6XbqeWDjT1avqa30s')

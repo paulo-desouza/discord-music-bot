@@ -3,6 +3,7 @@ from discord.ext import commands
 from more_itertools import value_chain
 
 from youtube_dl import YoutubeDL
+import youtube_dl
 
 bot = commands.Bot(command_prefix = '!')
 
@@ -24,7 +25,7 @@ class music_cog(commands.Cog):
         self.music_queue = []
         
         # YDL & FFMPEG Options
-        self.YDL_OPTIONS = {'format': 'worstaudio', 'noplaylist': 'False'}
+        self.YDL_OPTIONS = {'format': 'worstaudio', 'noplaylist': 'True'}
         self.FFMPEG_OPTIONS = {'before_options': '-reconnect 1 -reconnect_streamed 1 -reconnect_delay_max 5', 'options':'-vn'}
 
         # Storing voice channel & client info
@@ -38,7 +39,7 @@ class music_cog(commands.Cog):
 
         with YoutubeDL(self.YDL_OPTIONS) as ydl:
             try:
-                if 'https' in item[0:5]:        
+                if 'https' in item:        
                     info = ydl.extract_info(item, download=False)['entries'][0]
                 else:
                     query = " ".join(item)
@@ -52,6 +53,7 @@ class music_cog(commands.Cog):
             'webpage_url': info['webpage_url'],
             'thumbnail': info['thumbnail'], 
             'duration': info['duration'],
+            'info': info
 
             }
     
@@ -143,6 +145,7 @@ class music_cog(commands.Cog):
 
             # Searches for song.
             song = self.search_yt(query)
+
 
             # Check if there are any format errors (example: first result is a livestream)
             if type(song) == type(True):
