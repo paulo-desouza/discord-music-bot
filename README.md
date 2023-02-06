@@ -2,11 +2,8 @@
 
 <img src="https://cdn.custom-cursor.com/packs/3718/cute-cherry-pack.png" width="300" height="150">
 
-Music bot for your discord group parties!
+Music bot for your discord voice chat rooms!
 Great for studying, playing, and hanging out with friends. 
-
-Click <a href="https://discord.com/api/oauth2/authorize?client_id=999356775193120798&permissions=274881072128&scope=bot">here</a> to add it to your server!
-
 
 Here is a list with the current commands and functionalities:
 
@@ -37,4 +34,16 @@ Here is a list with the current commands and functionalities:
         !leave 
         Kicks the bot out of the voice channel. 
 
-(Currently not taking URL or Playlist URL arguments, it works as a youtube search.)
+
+## How to run this bot from your server/PC:
+
+Dependencies:
+
+Python 3.9: 
+FFMpeg : 
+Youtube_DL :
+Discord (PIP) (version 2.72) : 
+
+After all is installed, run "cherry-mc.py".
+
+Docker image will soon be available.
