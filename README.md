@@ -39,11 +39,27 @@ Here is a list with the current commands and functionalities:
 
 Dependencies:
 
-Python 3.9: 
-FFMpeg : 
-Youtube_DL :
-Discord (PIP) (version 2.72) : 
+Python 3.7+: https://www.python.org/downloads/
+
+        apt install python
+
+FFMpeg : https://www.ffmpeg.org/download.html 
+
+        apt install ffmpeg &&  pip install ffmpeg
+
+Youtube_DL : 
+
+        pip install youtube_dl
+
+Discord.py (PIP) (version 1.7.3) : 
+
+        pip install 'discord.py==1.7.3'
+
+PyNaCl : 
+
+        pip install PyNaCl
 
 After all is installed, run "cherry-mc.py".
 
-Docker image will soon be available.
+
+(Docker image will soon be available.)
