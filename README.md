@@ -39,13 +39,19 @@ Here is a list with the current commands and functionalities:
 
 Dependencies:
 
-Python 3.7+: https://www.python.org/downloads/
+Python 3.7+: https://www.python.org/downloads/   (windows)
 
-        apt install python
+        apt install python   (linux)
 
-FFMpeg : https://www.ffmpeg.org/download.html 
+FFMpeg : https://www.ffmpeg.org/download.html     (windows)
 
-        apt install ffmpeg &&  pip install ffmpeg
+        apt install ffmpeg     (linux)
+
+## After installing python, and adding it to the environment variable of either your linux or windows, these commands should run fine:
+
+FFMpeg:
+        
+         pip install ffmpeg
 
 Youtube_DL : 
 
