@@ -39,7 +39,7 @@ Here is a list with the current commands and functionalities:
 
 Dependencies:
 
-Python 3.7+: https://www.python.org/downloads/   (windows)
+Python 3.8+: https://www.python.org/downloads/   (windows)
 
         apt install python   (linux)
 
