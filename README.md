@@ -41,7 +41,7 @@ Dependencies:
 
 Python 3.8+: https://www.python.org/downloads/   (windows)
 
-        apt install python   (linux)
+        apt install python3 python3-pip   (linux)
 
 FFMpeg : https://www.ffmpeg.org/download.html     (windows)
 
