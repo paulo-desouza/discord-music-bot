@@ -1,9 +1,7 @@
 import discord 
 from discord.ext import commands
 
-
-
-token = "OTk5MzU2Nzc1MTkzMTIwNzk4.G-cxhB.ApWntsdZvAmZcPLc1YLfwzjO09osvR7mAzvEdk"
+token = "Redacted"
 
 
 intents = discord.Intents.all()
