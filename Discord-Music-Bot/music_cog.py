@@ -1,14 +1,11 @@
 import discord
 from discord.ext import commands
+from more_itertools import value_chain
 
-from yt_dlp import YoutubeDL
+from youtube_dl import YoutubeDL
+import youtube_dl
 
-
-
-
-intents = discord.Intents.all()
-bot = commands.Bot(intents=intents, command_prefix = '!')
-
+bot = commands.Bot(command_prefix = '!')
 
 class music_cog(commands.Cog):
     def __init__(self, bot):
@@ -47,16 +44,17 @@ class music_cog(commands.Cog):
                 else:
                     query = " ".join(item)
                     info = ydl.extract_info("ytsearch:%s" % query, download=False)['entries'][0]
-                    
+
             except Exception:
                 return False
         return {
-            'source': info['url'], 
+            'source': info['formats'][0]['url'], 
             'title': info['title'], 
             'webpage_url': info['webpage_url'],
             'thumbnail': info['thumbnail'], 
             'duration': info['duration'],
             'info': info
+
             }
     
     def convert_time(self, seconds):
@@ -78,7 +76,7 @@ class music_cog(commands.Cog):
         else:
             return f"{hours}:{minutes}:{seconds}"
 
-    def play_next(self, ctx):
+    def play_next(self):
         """
         Plays next song in the queue, and keeps looping this function until there is no more songs queued.
         """
@@ -88,14 +86,9 @@ class music_cog(commands.Cog):
             self.current_track_duration = self.music_queue[0][0]['duration']
             self.music_queue.pop(0)
             
-            self.voice_client.play(discord.FFmpegPCMAudio(m_url, **self.FFMPEG_OPTIONS), after=lambda e: self.play_next(ctx) )
-
+            self.voice_client.play(discord.FFmpegPCMAudio(m_url, **self.FFMPEG_OPTIONS), after=lambda e: self.play_next() )
         else:
             self.is_playing = False
-            
-            # SOMETHING NEEDS TO HAPPEN HERE. THE BOT NEEDS TO LEAVE IF THERE ARE NO SONGS PLAYING.
-
-
 
     async def play_music(self, ctx):
         """
@@ -122,7 +115,7 @@ class music_cog(commands.Cog):
                 
                 # Pops the song from the queue, and starts playing it. 
                 self.music_queue.pop(0)
-                self.voice_client.play(discord.FFmpegPCMAudio(m_url, **self.FFMPEG_OPTIONS), after=lambda e: self.play_next(ctx))
+                self.voice_client.play(discord.FFmpegPCMAudio(m_url, **self.FFMPEG_OPTIONS), after=lambda e: self.play_next())
 
         else:
             self.is_playing = False
@@ -413,8 +406,3 @@ class music_cog(commands.Cog):
                     colour = discord.Colour.dark_red()
                 )
             await ctx.send(embed2=embed2)
-
-
-
-async def setup(bot):
-    await bot.add_cog(music_cog(bot))

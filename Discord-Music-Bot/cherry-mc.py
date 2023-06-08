@@ -1,37 +1,16 @@
 import discord 
 from discord.ext import commands
+import os
 
+from music_cog import music_cog
 
-
-token = "OTk5MzU2Nzc1MTkzMTIwNzk4.G-cxhB.ApWntsdZvAmZcPLc1YLfwzjO09osvR7mAzvEdk"
-
-
-intents = discord.Intents.all()
-bot = commands.Bot(intents=intents, command_prefix = '!')
-
+bot = commands.Bot(command_prefix = '!')
 bot.remove_command('help')
+bot.add_cog(music_cog(bot))
 
-
-@bot.event
-async def on_ready():
-    print(f'Logged in as {bot.user.name} - {bot.user.id}')
-    
-    
-    await load('music_cog')
 
 
 @bot.command()
-async def load(music_cog):
-    try:
-        await bot.load_extension(music_cog)
-        print('Loaded {}'.format(music_cog))
-
-    except Exception as error:
-        print('{} cannot be loaded. [{}]'.format(music_cog, error))
-
-
-    
-@bot.command(name="help")
 async def help(ctx):
     """
     Displays available commands. 
@@ -100,17 +79,6 @@ async def help(ctx):
     )
 
     await ctx.send(embed=embed)
-    
 
 
-
-
-
-bot.run(token)
-
-
-
-
-
-
-
+bot.run('No token here')
