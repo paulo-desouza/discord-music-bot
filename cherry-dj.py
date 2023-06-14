@@ -1,14 +1,13 @@
 import discord 
+import os
 from discord.ext import commands
 
-token = "Redacted"
-
+token = os.getenv('DISCORD_TOKEN')
 
 intents = discord.Intents.all()
 bot = commands.Bot(intents=intents, command_prefix = '!')
 
 bot.remove_command('help')
-
 
 @bot.event
 async def on_ready():
