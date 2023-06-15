@@ -40,8 +40,8 @@ Before anything else, you need to set up your bot in your own discord developer 
 I am not providing this bot as a service. I am only providing this code. 
 After you set up your bot, copy your TOKEN into the Dockerfile of your clone of the repo, and follow these instructions:
 
-
-Dependencies:
+# Option 1:
+### Dependencies:
 
 Python 3.8+: https://www.python.org/downloads/   (windows)
 
@@ -51,7 +51,7 @@ FFMpeg : https://www.ffmpeg.org/download.html     (windows)
 
         apt install ffmpeg     (linux)
 
-### After installing python, and adding pip to your environment variables, run these commands:
+After installing python, and adding pip to your environment variables, run these commands:
 
 FFMpeg:
         
@@ -72,8 +72,8 @@ PyNaCl :
 After all is installed, run "cherry-mc.py".
 
 
-
-## Run it with Docker!
+# Option 2
+### Run it with Docker!
 Inside the repository, run:
 
         docker build -t acerola .
