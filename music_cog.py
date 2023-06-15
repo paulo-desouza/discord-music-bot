@@ -1,9 +1,7 @@
 import discord
 from discord.ext import commands
-
 from yt_dlp import YoutubeDL
-
-
+import asyncio
 
 
 intents = discord.Intents.all()
@@ -74,9 +72,9 @@ class music_cog(commands.Cog):
             hours += 1
         
         if hours == 0:
-            return f"{minutes}:{seconds}" 
+            return f"{minutes:02d}:{seconds:02d}" 
         else:
-            return f"{hours}:{minutes}:{seconds}"
+            return f"{hours:02d}:{minutes:02d}:{seconds:02d}"
 
     def play_next(self, ctx):
         """
@@ -88,14 +86,12 @@ class music_cog(commands.Cog):
             self.current_track_duration = self.music_queue[0][0]['duration']
             self.music_queue.pop(0)
             
-            self.voice_client.play(discord.FFmpegPCMAudio(m_url, **self.FFMPEG_OPTIONS), after=lambda e: self.play_next(ctx) )
-
-        else:
-            self.is_playing = False
-            
-            # SOMETHING NEEDS TO HAPPEN HERE. THE BOT NEEDS TO LEAVE IF THERE ARE NO SONGS PLAYING.
-
-
+            self.voice_client.play(discord.FFmpegPCMAudio(
+                 m_url,
+                **self.FFMPEG_OPTIONS),
+                after=lambda e: self.play_next(ctx) 
+                )
+        
 
     async def play_music(self, ctx):
         """
@@ -262,7 +258,7 @@ class music_cog(commands.Cog):
         if self.is_paused:
             self.is_playing = True
             self.is_paused = False
-            await self.voice_client.resume()
+            self.voice_client.resume()
             embed = discord.Embed(
                 description = f"{ctx.author} has resumed the current track.",
                 colour = discord.Colour.dark_red()
@@ -381,6 +377,29 @@ class music_cog(commands.Cog):
         self.voice_client.stop()
         await self.voice_client.disconnect()
         self.voice_client = None
+    
+    @commands.Cog.listener()
+    async def on_voice_state_update(self, member, before, after):
+    
+        if not member.id == self.bot.user.id:
+            return
+
+        elif before.channel is None:
+            voice = after.channel.guild.voice_client
+            time = 0
+            while True:
+                await asyncio.sleep(1)
+                time = time + 1
+                if voice.is_playing() and not voice.is_paused():
+                    time = 0
+                if time == 5:
+                    
+                    await voice.disconnect()
+                if not voice.is_connected():
+                    break
+
+
+
 
     @bot.command()
     async def replay(self, ctx, arg):
