@@ -2,8 +2,7 @@
 
 <img src="https://cdn.custom-cursor.com/packs/3718/cute-cherry-pack.png" width="300" height="150">
 
-Music bot for your discord voice chat rooms!
-Great for studying, playing, and hanging out with friends. 
+Music bot for discord voice chat rooms!
 
 Here is a list with the current commands and functionalities:
 
@@ -47,19 +46,19 @@ FFMpeg : https://www.ffmpeg.org/download.html     (windows)
 
         apt install ffmpeg     (linux)
 
-## After installing python, and adding it to the environment variable of either your linux or windows, these commands should run fine:
+### After installing python, and adding pip to your environment variables, run these commands:
 
 FFMpeg:
         
          pip install ffmpeg
 
-Youtube_DL : 
+yt_dlp : 
 
-        pip install youtube_dl
+        pip install yt_dlp
 
-Discord.py (PIP) (version 1.7.3) : 
+Discord.py (PIP): 
 
-        pip install discord.py==1.7.3
+        pip install discord.py
 
 PyNaCl : 
 
@@ -68,4 +67,12 @@ PyNaCl :
 After all is installed, run "cherry-mc.py".
 
 
-(Docker image will soon be available.)
+
+## Run it with Docker!
+Inside the repository, run:
+
+        docker build -t acerola .
+        docker run -d --name cherry acerola:latest 
+
+and the bot should come online. 
+
