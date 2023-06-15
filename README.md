@@ -36,6 +36,11 @@ Here is a list with the current commands and functionalities:
 
 ## How to run this bot from your server/PC:
 
+Before anything else, you need to set up your bot in your own discord developer portal. 
+I am not providing this bot as a service. I am only providing this code. 
+After you set up your bot, copy your TOKEN into the Dockerfile of your clone of the repo, and follow these instructions:
+
+
 Dependencies:
 
 Python 3.8+: https://www.python.org/downloads/   (windows)
